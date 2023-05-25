@@ -89,10 +89,8 @@ if st.button('Generar resumen'):
         with st.spinner(f'Generating summary for {file_name}...'):
             prompt = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles
 
-                        Task 1: 
-                        Create a summary of approximately 100 words for the following text {text} and present it after writting "Resumen:" 
-                        Task 2: 
-                        Identify and extract each one of the legal arguments in the text and write them after writting "Argumentos legales:"'''
+                        Task 1: Write 'Resumen' and then without leaving spaces create a summary of approximately 100 words for the following text {text} 
+                        Task 2: Write 'Argumentos legales:' and then without leaving spaces identify and extract each one of the legal arguments in the text '''
 
             summary = create_summary(prompt)
             # Split the summary into two sections: the 100-word summary and the main legal arguments
