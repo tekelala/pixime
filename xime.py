@@ -62,8 +62,6 @@ def read_docx(file):
 
 st.title('Document Summary App')
 
-# Initialize an empty DataFrame for storing document information
-new_row = pd.DataFrame({'Name of the document': [uploaded_file.name], 'Summary in 100 words': [summary_100_words], 'Main legal arguments': [legal_arguments]})
 doc_info = pd.concat([doc_info, new_row], ignore_index=True)
 
 uploaded_files = st.file_uploader("Upload a document", type=['pdf', 'doc', 'docx'], accept_multiple_files=True)
@@ -105,7 +103,9 @@ if st.button('Generar resumen'):
             legal_arguments = summary_sections[1]
 
             # Add the information to the DataFrame
-            doc_info = doc_info.append({'Name of the document': uploaded_file.name, 'Summary in 100 words': summary_100_words, 'Main legal arguments': legal_arguments}, ignore_index=True)
+            new_row = pd.DataFrame({'Name of the document': [uploaded_file.name], 'Summary in 100 words': [summary_100_words], 'Main legal arguments': [legal_arguments]})
+            doc_info = pd.concat([doc_info, new_row], ignore_index=True)
+
 
 # Display the table
 st.table(doc_info)
