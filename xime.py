@@ -21,8 +21,8 @@ def create_summary(prompt):
     # Define the body of the request
     body = {
         "prompt": conversation,
-        "model": "claude-v1.3",
-        "max_tokens_to_sample": 500,
+        "model": "claude-v1.3-100k",
+        "max_tokens_to_sample": 10000,
         "stop_sequences": ["\n\nHuman:"]
     }
 
@@ -90,11 +90,9 @@ if st.button('Generar resumen'):
             prompt = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles
 
                         Task 1: 
-                        Create a summary of approximately 100 words for the following document: 
-                        {text}
-
+                        Create a summary of approximately 100 words for the {text} and present it after writting "Resumen:" 
                         Task 2: 
-                        Identify and extract the main legal arguments in the document'''
+                        Identify and extract all the legal arguments in the document and write them after writting "Argumentos legales:"'''
 
             summary = create_summary(prompt)
             # Split the summary into two sections: the 100-word summary and the main legal arguments
