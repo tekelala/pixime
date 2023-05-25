@@ -21,7 +21,7 @@ def create_summary(prompt):
     # Define the body of the request
     body = {
         "prompt": conversation,
-        "model": "claude-v1.3-100k",
+        "model": "claude-instant-v1-100k",
         "max_tokens_to_sample": 10000,
         "stop_sequences": ["\n\nHuman:"]
     }
