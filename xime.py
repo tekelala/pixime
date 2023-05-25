@@ -87,15 +87,14 @@ for uploaded_file in uploaded_files:
 if st.button('Generar resumen'):
     for file_name, text in texts.items():
         with st.spinner(f'Generating summary for {file_name}...'):
-            prompt = f'''Role: You are an AI assistant trained in legal expertise. 
+            prompt = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be in Spanish
 
                         Task 1: 
-                        Please provide a summary of approximately 100 words for the following document: 
-                        {file_name}
+                        Create a summary of approximately 100 words for the following document, just write the summary do not write what you are doing: 
                         {text}
 
                         Task 2: 
-                        Identify and explain the main legal arguments in the document.'''
+                        Identify and extract the main legal arguments in the document.'''
 
             summary = create_summary(prompt)
             # Split the summary into two sections: the 100-word summary and the main legal arguments
