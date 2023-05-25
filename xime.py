@@ -8,7 +8,7 @@ import pandas as pd
 from PyPDF2 import PdfReader
 
 # Define send message function
-def create_summary(prompt):
+def create_text(prompt):
     api_url = "https://api.anthropic.com/v1/complete"
     headers = {
         "Content-Type": "application/json",
@@ -87,21 +87,20 @@ for uploaded_file in uploaded_files:
 if st.button('Generar resumen'):
     for file_name, text in texts.items():
         with st.spinner(f'Generating summary for {file_name}...'):
-            prompt = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles
+            prompt1 = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles
 
-                        Task 1: Write 'Resumen' and then create a summary of approximately 100 words for the following text {text}
-                        \n
-                        Task 2: Write 'Argumentos legales:' and then identify and extract each one of the legal arguments in the text '''
+                        Task: Create a summary of approximately 100 words for the following text {text}'''
+ 
+                        
+            prompt2 =  f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles
 
-            summary = create_summary(prompt)
-            # Split the summary into two sections: the 100-word summary and the main legal arguments
-            summary_sections = summary.split("\n\n")
+                        Task: Identify and extract each one of the legal arguments in the following text {text}'''
 
             # The first section is the 100-word summary
-            summary_100_words = summary_sections[0].replace("Resumen:", "").strip()
+            summary_100_words = create_text(prompt1)
 
             # The second section is the main legal arguments
-            legal_arguments = summary_sections[1].replace("Argumentos legales:", "").strip()
+            legal_arguments = create_text(prompt2)
 
 
             # Add the information to the DataFrame
