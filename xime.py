@@ -71,7 +71,7 @@ texts = {}
 
 for uploaded_file in uploaded_files:
     file_details = {"FileName":uploaded_file.name,"FileType":uploaded_file.type,"FileSize":uploaded_file.size}
-    st.write(file_details)
+    #st.write(file_details)
 
     bytes_data = BytesIO(uploaded_file.getvalue())
 
