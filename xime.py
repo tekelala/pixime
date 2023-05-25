@@ -67,6 +67,8 @@ doc_info = pd.DataFrame(columns=['Name of the document', 'Summary in 100 words',
 
 uploaded_files = st.file_uploader("Upload a document", type=['pdf', 'doc', 'docx'], accept_multiple_files=True)
 
+texts = {}
+
 for uploaded_file in uploaded_files:
     file_details = {"FileName":uploaded_file.name,"FileType":uploaded_file.type,"FileSize":uploaded_file.size}
     st.write(file_details)
@@ -80,13 +82,16 @@ for uploaded_file in uploaded_files:
     else:
         st.error("Unsupported file type")
 
-    if st.button(f'Generar resumen for {uploaded_file.name}'):
-        with st.spinner(f'Generating summary for {uploaded_file.name}...'):
+    texts[uploaded_file.name] = text
+
+if st.button('Generar resumen'):
+    for file_name, text in texts.items():
+        with st.spinner(f'Generating summary for {file_name}...'):
             prompt = f'''Role: You are an AI assistant trained in legal expertise. 
 
                         Task 1: 
                         Please provide a summary of approximately 100 words for the following document: 
-                        {uploaded_file.name}
+                        {file_name}
                         {text}
 
                         Task 2: 
@@ -103,7 +108,7 @@ for uploaded_file in uploaded_files:
             legal_arguments = summary_sections[1]
 
             # Add the information to the DataFrame
-            new_row = pd.DataFrame({'Name of the document': [uploaded_file.name], 'Summary in 100 words': [summary_100_words], 'Main legal arguments': [legal_arguments]})
+            new_row = pd.DataFrame({'Name of the document': [file_name], 'Summary in 100 words': [summary_100_words], 'Main legal arguments': [legal_arguments]})
             doc_info = pd.concat([doc_info, new_row], ignore_index=True)
 
 # Display the table
