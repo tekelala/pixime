@@ -87,12 +87,12 @@ for uploaded_file in uploaded_files:
 if st.button('Generar resumen'):
     for file_name, text in texts.items():
         with st.spinner(f'Generating summary for {file_name}...'):
-            prompt1 = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles
+            prompt1 = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles or writting what you are doing
 
                         Task: Create a summary of approximately 100 words for the following text {text}'''
  
                         
-            prompt2 =  f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles
+            prompt2 =  f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles or writting what you are doing
 
                         Task: Identify and extract each one of the legal arguments in the following text {text}'''
 
