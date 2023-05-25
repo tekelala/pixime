@@ -94,7 +94,7 @@ if st.button('Generar resumen'):
                         {text}
 
                         Task 2: 
-                        Identify and extract the main legal arguments in the document.'''
+                        Identify and extract the main legal arguments in the document, just extract the arguments do not write what you are doing'''
 
             summary = create_summary(prompt)
             # Split the summary into two sections: the 100-word summary and the main legal arguments
