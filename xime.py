@@ -63,7 +63,8 @@ def read_docx(file):
 st.title('Document Summary App')
 
 # Initialize an empty DataFrame for storing document information
-doc_info = pd.DataFrame(columns=['Name of the document', 'Summary in 100 words', 'Main legal arguments'])
+new_row = pd.DataFrame({'Name of the document': [uploaded_file.name], 'Summary in 100 words': [summary_100_words], 'Main legal arguments': [legal_arguments]})
+doc_info = pd.concat([doc_info, new_row], ignore_index=True)
 
 uploaded_files = st.file_uploader("Upload a document", type=['pdf', 'doc', 'docx'], accept_multiple_files=True)
 
