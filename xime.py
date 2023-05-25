@@ -5,6 +5,7 @@ from io import BytesIO
 import requests
 import json
 import pandas as pd
+from PyPDF2 import PdfReader
 
 # Define send message function
 def create_summary(prompt):
@@ -48,10 +49,10 @@ def create_summary(prompt):
 
 
 def read_pdf(file):
-    pdf_file = PyPDF2.PdfFileReader(file)
+    pdf_file = PdfReader(file)
     text = []
-    for page_num in range(pdf_file.getNumPages()):
-        text.append(pdf_file.getPage(page_num).extractText())
+    for page in pdf_file.pages:
+        text.append(page.extract_text())
     return " ".join(text)
 
 def read_docx(file):
