@@ -62,7 +62,8 @@ def read_docx(file):
 
 st.title('Document Summary App')
 
-doc_info = pd.concat([doc_info, new_row], ignore_index=True)
+# Initialize an empty DataFrame for storing document information
+doc_info = pd.DataFrame(columns=['Name of the document', 'Summary in 100 words', 'Main legal arguments'])
 
 uploaded_files = st.file_uploader("Upload a document", type=['pdf', 'doc', 'docx'], accept_multiple_files=True)
 
@@ -79,8 +80,7 @@ for uploaded_file in uploaded_files:
     else:
         st.error("Unsupported file type")
 
-if st.button('Generar resumen'):
-    for uploaded_file in uploaded_files:
+    if st.button(f'Generar resumen for {uploaded_file.name}'):
         with st.spinner(f'Generating summary for {uploaded_file.name}...'):
             prompt = f'''Role: You are an AI assistant trained in legal expertise. 
 
@@ -105,7 +105,6 @@ if st.button('Generar resumen'):
             # Add the information to the DataFrame
             new_row = pd.DataFrame({'Name of the document': [uploaded_file.name], 'Summary in 100 words': [summary_100_words], 'Main legal arguments': [legal_arguments]})
             doc_info = pd.concat([doc_info, new_row], ignore_index=True)
-
 
 # Display the table
 st.table(doc_info)
