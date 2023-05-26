@@ -22,6 +22,7 @@ def create_text(prompt):
     body = {
         "prompt": conversation,
         "model": "claude-v1.3-100k",
+        "temperature": 0,
         "max_tokens_to_sample": 10000,
         "stop_sequences": ["\n\nHuman:"]
     }
@@ -63,7 +64,7 @@ def read_docx(file):
 st.title('Document Summary App')
 
 # Initialize an empty DataFrame for storing document information
-doc_info = pd.DataFrame(columns=['Name of the document', 'Summary in 100 words', 'Main legal arguments'])
+doc_info = pd.DataFrame(columns=['Name of the document', 'Summary in 150 words', 'Main arguments'])
 
 uploaded_files = st.file_uploader("Upload a document", type=['pdf', 'doc', 'docx'], accept_multiple_files=True)
 
@@ -87,14 +88,14 @@ for uploaded_file in uploaded_files:
 if st.button('Generar resumen'):
     for file_name, text in texts.items():
         with st.spinner(f'Generating summary for {file_name}...'):
-            prompt1 = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles or writting what you are doing
-
-                        Task: Create a summary of approximately 100 words for the following text {text}'''
+            prompt1 = f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish 
+                        and just provide the text requested no need of titles or writting what you are doing.
+                        Task: Create a summary of approximately 150 words for the following text {text}'''
  
                         
             prompt2 =  f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles or writting what you are doing
 
-                        Task: Identify and extract each one of the legal arguments in the following text {text}'''
+                        Task: Identify and extract each one of the legal and patentability arguments in the following text {text}'''
 
             # The first section is the 100-word summary
             summary_100_words = create_text(prompt1)
