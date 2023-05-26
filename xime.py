@@ -95,7 +95,8 @@ if st.button('Generar resumen'):
                         
             prompt2 =  f'''Role: You are an AI assistant trained in legal expertise and your answers needs to be always in Spanish and just provide the text requested no need of titles or writting what you are doing
 
-                        Task: Identify and extract each one of the legal and patentability arguments in the following text {text}'''
+                        Task: Identify and extract each one of the legal and patentability arguments in the following text {text}. 
+                        Double check to be sure you extracted all the arguments before writting your answer'''
 
             # The first section is the 100-word summary
             summary_100_words = create_text(prompt1)
